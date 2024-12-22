@@ -1,0 +1,11 @@
+{
+  "Id": "stedee.GuitarVolumeControl",
+  "AssemblyPath": "GuitarVolumeControl.dll",
+  "PackPath": "GuitarVolumeControl.pck",
+  "Metadata": {
+    "Name": "GuitarVolumeControl",
+    "Author": "stedee",
+    "Version": "0.0.1",
+    "Description": "A mod to add a setting for the guitar's volume"
+  }
+}
