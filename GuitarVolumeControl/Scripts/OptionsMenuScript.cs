@@ -97,7 +97,6 @@ namespace GuitarVolumeControl.Scripts
             {
                 if (stringEditWaiter.Check(token))
                 {
-                    Console.WriteLine("1");
                     yield return token;
 
                     // if PlayerData.player_options.has("gtr_vol"):
@@ -149,12 +148,62 @@ namespace GuitarVolumeControl.Scripts
                     yield return new Token(TokenType.BracketClose);
                     yield return new Token(TokenType.OpAssign);
                     yield return new ConstantToken(new RealVariant(1));
+                    yield return new Token(TokenType.Newline, 1);
+
+                    // if PlayerData.player_options.has("radio_vol"):
+                    yield return new Token(TokenType.CfIf);
+                    yield return new IdentifierToken("PlayerData");
+                    yield return new Token(TokenType.Period);
+                    yield return new IdentifierToken("player_options");
+                    yield return new Token(TokenType.Period);
+                    yield return new IdentifierToken("has");
+                    yield return new Token(TokenType.ParenthesisOpen);
+                    yield return new ConstantToken(new StringVariant("radio_vol"));
+                    yield return new Token(TokenType.ParenthesisClose);
+                    yield return new Token(TokenType.Colon);
+                    yield return new Token(TokenType.Newline, 2);
+
+                    // $"Control/Panel/tabs_main/main/ScrollContainer/HBoxContainer/VBoxContainer/radio_vol/VBoxContainer/radio_vol".value = PlayerData.player_options.radio_vol
+                    yield return new Token(TokenType.Dollar);
+                    yield return new ConstantToken(new StringVariant("Control/Panel/tabs_main/main/ScrollContainer/HBoxContainer/VBoxContainer/radio_vol/VBoxContainer/radio_vol"));
+                    yield return new Token(TokenType.Period);
+                    yield return new IdentifierToken("value");
+                    yield return new Token(TokenType.OpAssign);
+                    yield return new IdentifierToken("PlayerData");
+                    yield return new Token(TokenType.Period);
+                    yield return new IdentifierToken("player_options");
+                    yield return new Token(TokenType.Period);
+                    yield return new IdentifierToken("radio_vol");
+                    yield return new Token(TokenType.Newline, 1);
+
+                    // else:
+                    yield return new Token(TokenType.CfElse);
+                    yield return new Token(TokenType.Colon);
+                    yield return new Token(TokenType.Newline, 2);
+
+                    // $"Control/Panel/tabs_main/main/ScrollContainer/HBoxContainer/VBoxContainer/radio_vol/VBoxContainer/radio_vol".value = 1.0
+                    yield return new Token(TokenType.Dollar);
+                    yield return new ConstantToken(new StringVariant("Control/Panel/tabs_main/main/ScrollContainer/HBoxContainer/VBoxContainer/radio_vol/VBoxContainer/radio_vol"));
+                    yield return new Token(TokenType.Period);
+                    yield return new IdentifierToken("value");
+                    yield return new Token(TokenType.OpAssign);
+                    yield return new ConstantToken(new RealVariant(1));
+                    yield return new Token(TokenType.Newline, 2);
+
+                    // PlayerData.player_options["radio_vol"] = 1.0
+                    yield return new IdentifierToken("PlayerData");
+                    yield return new Token(TokenType.Period);
+                    yield return new IdentifierToken("player_options");
+                    yield return new Token(TokenType.BracketOpen);
+                    yield return new ConstantToken(new StringVariant("radio_vol"));
+                    yield return new Token(TokenType.BracketClose);
+                    yield return new Token(TokenType.OpAssign);
+                    yield return new ConstantToken(new RealVariant(1));
 
                     yield return token;
                 }
                 else if (resetWaiter.Check(token))
                 {
-                    Console.WriteLine("1");
                     yield return token;
 
                     // $"Control/Panel/tabs_main/main/ScrollContainer/HBoxContainer/VBoxContainer/gtr_vol/VBoxContainer/gtr_vol".value = 1.0
@@ -164,12 +213,20 @@ namespace GuitarVolumeControl.Scripts
                     yield return new IdentifierToken("value");
                     yield return new Token(TokenType.OpAssign);
                     yield return new ConstantToken(new RealVariant(1));
+                    yield return new Token(TokenType.Newline, 1);
+
+                    // $"Control/Panel/tabs_main/main/ScrollContainer/HBoxContainer/VBoxContainer/radio_vol/VBoxContainer/radio_vol".value = 1.0
+                    yield return new Token(TokenType.Dollar);
+                    yield return new ConstantToken(new StringVariant("Control/Panel/tabs_main/main/ScrollContainer/HBoxContainer/VBoxContainer/radio_vol/VBoxContainer/radio_vol"));
+                    yield return new Token(TokenType.Period);
+                    yield return new IdentifierToken("value");
+                    yield return new Token(TokenType.OpAssign);
+                    yield return new ConstantToken(new RealVariant(1));
 
                     yield return token;
                 }
                 else if (saveWaiter.Check(token))
                 {
-                    Console.WriteLine("1");
                     yield return token;
 
                     // PlayerData.player_options.gtr_vol = $"Control/Panel/tabs_main/main/ScrollContainer/HBoxContainer/VBoxContainer/gtr_vol/VBoxContainer/gtr_vol".value
@@ -183,12 +240,24 @@ namespace GuitarVolumeControl.Scripts
                     yield return new ConstantToken(new StringVariant("Control/Panel/tabs_main/main/ScrollContainer/HBoxContainer/VBoxContainer/gtr_vol/VBoxContainer/gtr_vol"));
                     yield return new Token(TokenType.Period);
                     yield return new IdentifierToken("value");
+                    yield return new Token(TokenType.Newline, 1);
+
+                    // PlayerData.player_options.radio_vol = $"Control/Panel/tabs_main/main/ScrollContainer/HBoxContainer/VBoxContainer/radio_vol/VBoxContainer/radio_vol".value
+                    yield return new IdentifierToken("PlayerData");
+                    yield return new Token(TokenType.Period);
+                    yield return new IdentifierToken("player_options");
+                    yield return new Token(TokenType.Period);
+                    yield return new IdentifierToken("radio_vol");
+                    yield return new Token(TokenType.OpAssign);
+                    yield return new Token(TokenType.Dollar);
+                    yield return new ConstantToken(new StringVariant("Control/Panel/tabs_main/main/ScrollContainer/HBoxContainer/VBoxContainer/radio_vol/VBoxContainer/radio_vol"));
+                    yield return new Token(TokenType.Period);
+                    yield return new IdentifierToken("value");
 
                     yield return token;
                 }
                 else if (audioSetWaiter.Check(token))
                 {
-                    Console.WriteLine("1");
                     yield return token;
 
                     // index = AudioServer.get_bus_index("Guitar")
@@ -272,11 +341,94 @@ namespace GuitarVolumeControl.Scripts
                     yield return new Token(TokenType.Comma);
                     yield return new ConstantToken(new StringVariant("FadeBus"));
                     yield return new Token(TokenType.ParenthesisClose);
+                    yield return new Token(TokenType.Newline, 1);
+                    yield return new Token(TokenType.Newline, 1);
+
+                    // index = AudioServer.get_bus_index("Radio")
+                    yield return new IdentifierToken("index");
+                    yield return new Token(TokenType.OpAssign);
+                    yield return new IdentifierToken("AudioServer");
+                    yield return new Token(TokenType.Period);
+                    yield return new IdentifierToken("get_bus_index");
+                    yield return new Token(TokenType.ParenthesisOpen);
+                    yield return new ConstantToken(new StringVariant("Radio"));
+                    yield return new Token(TokenType.ParenthesisClose);
+                    yield return new Token(TokenType.Newline, 1);
+
+                    // if PlayerData.player_options.has("radio_vol"):
+                    yield return new Token(TokenType.CfIf);
+                    yield return new IdentifierToken("PlayerData");
+                    yield return new Token(TokenType.Period);
+                    yield return new IdentifierToken("player_options");
+                    yield return new Token(TokenType.Period);
+                    yield return new IdentifierToken("has");
+                    yield return new Token(TokenType.ParenthesisOpen);
+                    yield return new ConstantToken(new StringVariant("radio_vol"));
+                    yield return new Token(TokenType.ParenthesisClose);
+                    yield return new Token(TokenType.Colon);
+                    yield return new Token(TokenType.Newline, 2);
+
+                    // AudioServer.set_bus_volume_db(index, linear2db(PlayerData.player_options.radio_vol))
+                    yield return new IdentifierToken("AudioServer");
+                    yield return new Token(TokenType.Period);
+                    yield return new IdentifierToken("set_bus_volume_db");
+                    yield return new Token(TokenType.ParenthesisOpen);
+                    yield return new IdentifierToken("index");
+                    yield return new Token(TokenType.Comma);
+                    yield return new Token(TokenType.BuiltInFunc, (uint?)BuiltinFunction.MathLinear2Db);
+                    yield return new Token(TokenType.ParenthesisOpen);
+                    yield return new IdentifierToken("PlayerData");
+                    yield return new Token(TokenType.Period);
+                    yield return new IdentifierToken("player_options");
+                    yield return new Token(TokenType.Period);
+                    yield return new IdentifierToken("radio_vol");
+                    yield return new Token(TokenType.ParenthesisClose);
+                    yield return new Token(TokenType.ParenthesisClose);
+                    yield return new Token(TokenType.Newline, 1);
+
+                    // else:
+                    yield return new Token(TokenType.CfElse);
+                    yield return new Token(TokenType.Colon);
+                    yield return new Token(TokenType.Newline, 2);
+
+                    // AudioServer.set_bus_volume_db(index, linear2db(1.0))
+                    yield return new IdentifierToken("AudioServer");
+                    yield return new Token(TokenType.Period);
+                    yield return new IdentifierToken("set_bus_volume_db");
+                    yield return new Token(TokenType.ParenthesisOpen);
+                    yield return new IdentifierToken("index");
+                    yield return new Token(TokenType.Comma);
+                    yield return new Token(TokenType.BuiltInFunc, (uint?)BuiltinFunction.MathLinear2Db);
+                    yield return new Token(TokenType.ParenthesisOpen);
+                    yield return new ConstantToken(new RealVariant(1));
+                    yield return new Token(TokenType.ParenthesisClose);
+                    yield return new Token(TokenType.ParenthesisClose);
+                    yield return new Token(TokenType.Newline, 2);
+
+                    // PlayerData.player_options["radio_vol"] = 1.0
+                    yield return new IdentifierToken("PlayerData");
+                    yield return new Token(TokenType.Period);
+                    yield return new IdentifierToken("player_options");
+                    yield return new Token(TokenType.BracketOpen);
+                    yield return new ConstantToken(new StringVariant("radio_vol"));
+                    yield return new Token(TokenType.BracketClose);
+                    yield return new Token(TokenType.OpAssign);
+                    yield return new ConstantToken(new RealVariant(1));
+                    yield return new Token(TokenType.Newline, 1);
+
+                    // AudioServer.set_bus_send(index, "Master")
+                    yield return new IdentifierToken("AudioServer");
+                    yield return new Token(TokenType.Period);
+                    yield return new IdentifierToken("set_bus_send");
+                    yield return new Token(TokenType.ParenthesisOpen);
+                    yield return new IdentifierToken("index");
+                    yield return new Token(TokenType.Comma);
+                    yield return new ConstantToken(new StringVariant("Master"));
+                    yield return new Token(TokenType.ParenthesisClose);
 
                     yield return token;
                 } else if (functionWaiter.Check(token))
                 {
-                    Console.WriteLine("1");
                     yield return token;
 
                     // func _on_guitar_vol_value_changed(value): $"Control/Panel/tabs_main/main/ScrollContainer/HBoxContainer/VBoxContainer/gtr_vol/VBoxContainer/gtr_label".text = str(value * 100.0) + "%"
@@ -288,6 +440,28 @@ namespace GuitarVolumeControl.Scripts
                     yield return new Token(TokenType.Colon);
                     yield return new Token(TokenType.Dollar);
                     yield return new ConstantToken(new StringVariant("Control/Panel/tabs_main/main/ScrollContainer/HBoxContainer/VBoxContainer/gtr_vol/VBoxContainer/gtr_label"));
+                    yield return new Token(TokenType.Period);
+                    yield return new IdentifierToken("text");
+                    yield return new Token(TokenType.OpAssign);
+                    yield return new Token(TokenType.BuiltInFunc, (uint?)BuiltinFunction.TextStr);
+                    yield return new Token(TokenType.ParenthesisOpen);
+                    yield return new IdentifierToken("value");
+                    yield return new Token(TokenType.OpMul);
+                    yield return new ConstantToken(new RealVariant(100));
+                    yield return new Token(TokenType.ParenthesisClose);
+                    yield return new Token(TokenType.OpAdd);
+                    yield return new ConstantToken(new StringVariant("%"));
+                    yield return new Token(TokenType.Newline);
+
+                    // func _on_radio_vol_value_changed(value): $"Control/Panel/tabs_main/main/ScrollContainer/HBoxContainer/VBoxContainer/radio_vol/VBoxContainer/radio_label".text = str(value * 100.0) + "%"
+                    yield return new Token(TokenType.PrFunction);
+                    yield return new IdentifierToken("_on_radio_vol_value_changed");
+                    yield return new Token(TokenType.ParenthesisOpen);
+                    yield return new IdentifierToken("value");
+                    yield return new Token(TokenType.ParenthesisClose);
+                    yield return new Token(TokenType.Colon);
+                    yield return new Token(TokenType.Dollar);
+                    yield return new ConstantToken(new StringVariant("Control/Panel/tabs_main/main/ScrollContainer/HBoxContainer/VBoxContainer/radio_vol/VBoxContainer/radio_label"));
                     yield return new Token(TokenType.Period);
                     yield return new IdentifierToken("text");
                     yield return new Token(TokenType.OpAssign);

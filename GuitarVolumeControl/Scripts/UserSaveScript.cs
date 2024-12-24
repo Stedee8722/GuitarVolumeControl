@@ -28,6 +28,13 @@ namespace GuitarVolumeControl.Scripts
                     yield return new Token(TokenType.Colon);
                     yield return new ConstantToken(new RealVariant(1));
                     yield return new Token(TokenType.Comma);
+                    yield return new Token(TokenType.Newline, 2);
+
+                    // "radio_vol": 1.0,
+                    yield return new ConstantToken(new StringVariant("radio_vol"));
+                    yield return new Token(TokenType.Colon);
+                    yield return new ConstantToken(new RealVariant(1));
+                    yield return new Token(TokenType.Comma);
 
                     yield return token;
                 }
