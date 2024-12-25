@@ -1,4 +1,4 @@
-# Guitar Volume Control?
+# Guitar Volume Control
 
 A mod to add a setting for the guitar's volume
 
